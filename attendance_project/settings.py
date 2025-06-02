@@ -28,6 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['attendanceform.onrender.com']
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://attendanceform.onrender.com",
+]
+
+
 
 # Application definition
 
