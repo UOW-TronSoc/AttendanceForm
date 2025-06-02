@@ -1,0 +1,78 @@
+{% extends "attendance/base.html" %}
+
+{% block content %}
+<div class="container my-5">
+  <h2 class="mb-4">Meeting Feedback</h2>
+
+  <form method="post">
+    {% csrf_token %}
+
+    {# 1) Render the management form for the formset #}
+    {{ formset.management_form }}
+
+    {# 2) Non-field errors, if any #}
+    {% if formset.non_form_errors %}
+      <div class="alert alert-danger mb-3">
+        {% for err in formset.non_form_errors %}
+          <div>{{ err }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="accordion" id="feedbackAccordion">
+      {% for form, member in paired %}
+        <div class="accordion-item mb-3">
+          <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+            <button class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse{{ forloop.counter }}"
+                    aria-expanded="false"
+                    aria-controls="collapse{{ forloop.counter }}">
+              {{ member.name }}
+            </button>
+          </h2>
+          <div id="collapse{{ forloop.counter }}"
+               class="accordion-collapse collapse"
+               aria-labelledby="heading{{ forloop.counter }}"
+               data-bs-parent="#feedbackAccordion">
+            <div class="accordion-body">
+              {# Engagement field #}
+              <div class="mb-3">
+                <label class="form-label">{{ form.engagement.label }}</label>
+                {{ form.engagement }}
+                {% for err in form.engagement.errors %}
+                  <div class="text-danger small">{{ err }}</div>
+                {% endfor %}
+              </div>
+
+              {# Effort field #}
+              <div class="mb-3">
+                <label class="form-label">{{ form.effort.label }}</label>
+                {{ form.effort }}
+                {% for err in form.effort.errors %}
+                  <div class="text-danger small">{{ err }}</div>
+                {% endfor %}
+              </div>
+
+              {# Contribution field #}
+              <div class="mb-3">
+                <label class="form-label">{{ form.contribution.label }}</label>
+                {{ form.contribution }}
+                {% for err in form.contribution.errors %}
+                  <div class="text-danger small">{{ err }}</div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit All Feedback</button>
+    <a href="{% url 'attendance:meeting_create' %}" class="btn btn-secondary ms-2">
+      ← Back to Attendance
+    </a>
+  </form>
+</div>
+{% endblock %}

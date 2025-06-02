@@ -1,0 +1,23 @@
+{% extends "attendance/base.html" %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="alert alert-success">
+    <h4 class="alert-heading">Meeting Recorded!</h4>
+    <p>
+      Your meeting on
+      <strong>{{ meeting.datetime|date:"Y-m-d H:i" }}</strong>
+      for team "<strong>{{ meeting.primary_team.name }}</strong>" has been saved.
+    </p>
+    <hr>
+    <p class="mb-0">
+      <a href="{% url 'attendance:meeting_create' %}" class="btn btn-primary">
+        Record Another Meeting
+      </a>
+      <a href="{% url 'attendance:list_meetings' %}" class="btn btn-secondary">
+        View All Meetings
+      </a>
+    </p>
+  </div>
+</div>
+{% endblock %}

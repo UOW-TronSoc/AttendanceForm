@@ -1,0 +1,210 @@
+[
+  {
+    "model": "attendance.team",
+    "pk": 1,
+    "fields": {
+      "name": "Full Team"
+    }
+  },
+  {
+    "model": "attendance.team",
+    "pk": 2,
+    "fields": {
+      "name": "Team Leads"
+    }
+  },
+  {
+    "model": "attendance.team",
+    "pk": 3,
+    "fields": {
+      "name": "Core Team"
+    }
+  },
+  {
+    "model": "attendance.team",
+    "pk": 4,
+    "fields": {
+      "name": "Arm Team"
+    }
+  },
+  {
+    "model": "attendance.team",
+    "pk": 5,
+    "fields": {
+      "name": "Science Team"
+    }
+  },
+  {
+    "model": "attendance.team",
+    "pk": 6,
+    "fields": {
+      "name": "Peripherals Team"
+    }
+  },
+  {
+    "model": "attendance.team",
+    "pk": 7,
+    "fields": {
+      "name": "Base Station Team"
+    }
+  },
+  {
+    "model": "attendance.team",
+    "pk": 8,
+    "fields": {
+      "name": "Logistics Team"
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 1,
+    "fields": {
+      "name": "Tyler Rowles",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 2,
+    "fields": {
+      "name": "Bodhidharma Bailey",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 3,
+    "fields": {
+      "name": "Luna Marsh",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 4,
+    "fields": {
+      "name": "Alex Hitchins",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 5,
+    "fields": {
+      "name": "Connor Kellalea",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 6,
+    "fields": {
+      "name": "Soham Verma",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 7,
+    "fields": {
+      "name": "Adem Benten",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 8,
+    "fields": {
+      "name": "Tasha Greenham",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 9,
+    "fields": {
+      "name": "Pierce O'Connor",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 10,
+    "fields": {
+      "name": "Tu Quoc Tri Le (Jack)",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 11,
+    "fields": {
+      "name": "Vincent Chao",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 12,
+    "fields": {
+      "name": "Hunter de Jong",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 13,
+    "fields": {
+      "name": "Izzy Gill",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 14,
+    "fields": {
+      "name": "Naumankhan Pathan",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 15,
+    "fields": {
+      "name": "Michael McMillan",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 16,
+    "fields": {
+      "name": "Adam Bosevski",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 17,
+    "fields": {
+      "name": "Hollie Ayoub",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 18,
+    "fields": {
+      "name": "Jonathan Walsh",
+      "teams": []
+    }
+  },
+  {
+    "model": "attendance.member",
+    "pk": 19,
+    "fields": {
+      "name": "Christopher Edwards",
+      "teams": []
+    }
+  }
+]

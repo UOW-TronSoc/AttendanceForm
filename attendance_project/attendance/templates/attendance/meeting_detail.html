@@ -1,0 +1,55 @@
+{% extends "attendance/base.html" %}
+
+{% block content %}
+<div class="container my-5">
+  <h2>Meeting Details</h2>
+  <p>
+    <strong>Team:</strong> {{ meeting.primary_team.name }}<br>
+    <strong>Date &amp; Time:</strong> {{ meeting.datetime|date:"Y-m-d H:i" }}
+  </p>
+
+  <h4>Attendance &amp; Feedback</h4>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Member</th>
+        <th>Attended</th>
+        <th>Engagement</th>
+        <th>Effort</th>
+        <th>Contribution</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for af in meeting.attendance_feedback.all %}
+        <tr>
+          <td>{{ af.member.name }}</td>
+          <td>{{ af.attended|yesno:"Yes,No" }}</td>
+          <td>
+            {% if af.engagement %}
+              {{ af.get_engagement_display }}
+            {% else %}
+              —
+            {% endif %}
+          </td>
+          <td>
+            {% if af.effort %}
+              {{ af.get_effort_display }}
+            {% else %}
+              —
+            {% endif %}
+          </td>
+          <td>
+            {% if af.contribution %}
+              {{ af.get_contribution_display }}
+            {% else %}
+              —
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="{% url 'attendance:list_meetings' %}" class="btn btn-secondary">← Back to All Meetings</a>
+</div>
+{% endblock %}

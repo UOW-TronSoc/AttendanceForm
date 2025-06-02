@@ -1,0 +1,49 @@
+{% extends "attendance/base.html" %}
+{% block content %}
+<div class="container my-5">
+  <h2>All Meetings</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date & Time</th>
+        <th>Team</th>
+        <th># Attendees</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in meetings %}
+        <tr>
+          <td>{{ m.datetime|date:"Y-m-d H:i" }}</td>
+          <td>{{ m.primary_team.name }}</td>
+          <td>{{ m.attendance_feedback.count }}</td>
+          <td>
+            <a href="{% url 'attendance:detail_meeting' m.pk %}" class="btn btn-sm btn-outline-primary">Details</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4" class="text-center">No meetings recorded yet.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if is_paginated %}
+    <nav>
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+          </li>
+        {% endif %}
+        <li class="page-item disabled"><span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span></li>
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  {% endif %}
+</div>
+{% endblock %}

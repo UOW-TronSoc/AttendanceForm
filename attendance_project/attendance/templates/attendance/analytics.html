@@ -1,0 +1,138 @@
+{% extends "attendance/base.html" %}
+{% load static %}
+
+{% block title %}Analytics – Attendance{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h2 class="mb-4">Attendance Analytics</h2>
+
+  <!-- Chart 1: Number of Meetings per Team -->
+  <div class="mb-5">
+    <h4>Meetings per Team</h4>
+    <canvas id="meetingsPerTeamChart" height="100"></canvas>
+  </div>
+
+  <!-- Chart 2: Average Engagement Over Time -->
+  <div class="mb-5">
+    <h4>Average Engagement Over Time</h4>
+    <canvas id="avgEngagementChart" height="100"></canvas>
+  </div>
+
+  <!-- Table: Top 5 Most‐Attending Members -->
+  <div class="mb-5">
+    <h4>Top 5 Most‐Attending Members</h4>
+    <table class="table table-striped w-50">
+      <thead>
+        <tr>
+          <th>Member</th>
+          <th># Meetings Attended</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in top_members %}
+          <tr>
+            <td>{{ entry.member__name }}</td>
+            <td>{{ entry.attendance_count }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="2" class="text-center">No attendance data yet.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- New Section: Per‐Member Average Feedback -->
+  <div class="mb-5">
+    <h4>Average Feedback by Member</h4>
+    <table class="table table-bordered w-75">
+      <thead>
+        <tr>
+          <th>Member</th>
+          <th>Avg Engagement</th>
+          <th>Avg Effort</th>
+          <th>Avg Contribution</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in member_feedback_list %}
+          <tr>
+            <td>{{ m.name }}</td>
+            <td>{{ m.avg_engagement }}</td>
+            <td>{{ m.avg_effort }}</td>
+            <td>{{ m.avg_contribution }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="4" class="text-center">No feedback data available.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+// Parse the JSON‐encoded data passed from the view
+const teamLabels       = JSON.parse('{{ team_labels_json|escapejs }}');
+const teamCounts       = JSON.parse('{{ team_counts_json|escapejs }}');
+const engagementLabels = JSON.parse('{{ engagement_labels_json|escapejs }}');
+const engagementValues = JSON.parse('{{ engagement_values_json|escapejs }}');
+
+// Chart 1: Bar chart for Meetings per Team
+const ctx1 = document.getElementById("meetingsPerTeamChart").getContext("2d");
+new Chart(ctx1, {
+  type: "bar",
+  data: {
+    labels: teamLabels,
+    datasets: [{
+      label: "# of Meetings",
+      data: teamCounts,
+      backgroundColor: "rgba(54, 162, 235, 0.6)",
+      borderColor: "rgba(54, 162, 235, 1)",
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: { beginAtZero: true, ticks: { stepSize: 1 } }
+    },
+    plugins: { legend: { display: false } }
+  }
+});
+
+// Chart 2: Line chart for Average Engagement Over Time
+const ctx2 = document.getElementById("avgEngagementChart").getContext("2d");
+new Chart(ctx2, {
+  type: "line",
+  data: {
+    labels: engagementLabels,
+    datasets: [{
+      label: "Avg Engagement",
+      data: engagementValues,
+      fill: false,
+      tension: 0.3,
+      backgroundColor: "rgba(255, 99, 132, 0.6)",
+      borderColor: "rgba(255, 99, 132, 1)",
+      borderWidth: 2,
+      pointRadius: 4
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        min: 1,
+        max: 5,
+        ticks: { stepSize: 1 },
+        title: { display: true, text: "Engagement (1–5)" }
+      }
+    }
+  }
+});
+</script>
+{% endblock %}
